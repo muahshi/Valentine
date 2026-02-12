@@ -4,163 +4,185 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>A Special Surprise ❤️</title>
+    <title>A Samira & Mubashir Production ❤️</title>
     
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://muahshi.github.io/Valentine/">
-    <meta property="og:title" content="A Special Surprise ❤️">
-    <meta property="og:description" content="Mubashir has automated something special for you! 💍🚀">
+    <meta property="og:title" content="A Cinematic Surprise for Samira ❤️">
+    <meta property="og:description" content="Mubashir's special automation... Just for her. 💍🚀">
     <meta property="og:image" content="https://muahshi.github.io/Valentine/og-image.jpg">
-    <meta property="og:image:secure_url" content="https://muahshi.github.io/Valentine/og-image.jpg">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Great+Vibes&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <style>
         :root { 
-            --deep-pink: #d81b60; 
-            --bright-pink: #ff4d6d; 
-            --gold: #d4af37;
-            --bg-gradient: linear-gradient(135deg, #ff8fa3 0%, #ff4d6d 100%);
+            --deep-pink: #9d0208; 
+            --bright-pink: #ff0a54; 
+            --gold: #ffbd00;
+            --bg-dark: #2d0016;
         }
 
         body { 
             margin: 0; height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center; 
-            background: var(--bg-gradient); font-family: 'Poppins', sans-serif; overflow: hidden; 
+            background: var(--bg-dark); font-family: 'Poppins', sans-serif; overflow: hidden; 
         }
-        
-        #flashOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; opacity: 0; pointer-events: none; z-index: 9999; }
-        
-        /* The Bag/Box Style Card */
+
+        #particles { position: fixed; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+
         .card { 
-            background: #fff0f3; 
-            padding: 2rem; 
-            border-radius: 20px; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2); 
-            text-align: center; z-index: 10; width: 85%; max-width: 420px; 
-            border: 8px double var(--bright-pink); 
-            outline: 2px solid var(--gold); 
+            background: rgba(255, 255, 255, 0.08); 
+            padding: 2.5rem 1.5rem; 
+            border-radius: 30px; 
+            box-shadow: 0 0 40px rgba(255, 10, 84, 0.4); 
+            text-align: center; z-index: 10; width: 88%; max-width: 450px; 
+            border: 2px solid rgba(255, 189, 0, 0.3);
+            backdrop-filter: blur(15px);
             position: relative;
+            color: white;
         }
 
-        .card::before { content: '🌸'; position: absolute; top: 10px; left: 10px; font-size: 1.2rem; }
-        .card::after { content: '🌸'; position: absolute; bottom: 10px; right: 10px; font-size: 1.2rem; }
+        .title-cinematic { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--gold); margin: 0; text-shadow: 0 0 10px var(--gold); }
+        .names { font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: #ffccd5; margin-bottom: 15px; }
 
-        .calc-container { 
-            background: var(--deep-pink); padding: 15px; border-radius: 15px; 
-            margin-bottom: 20px; color: white; border-bottom: 4px solid var(--gold);
+        .calc-box { 
+            background: rgba(157, 2, 8, 0.6); padding: 12px; border-radius: 50px; 
+            margin: 15px 0; border: 1px solid var(--gold);
         }
-        .calc-percent { font-size: 2.5rem; font-weight: bold; font-family: 'serif'; }
 
-        #lifeLoading { text-align: left; font-family: 'monospace'; color: var(--deep-pink); }
-        .loader-bar { width: 100%; height: 12px; background: #ffe5ec; border-radius: 10px; overflow: hidden; margin: 15px 0; border: 1px solid var(--gold); }
-        .loader-fill { width: 0%; height: 100%; background: var(--bright-pink); transition: width 0.3s; }
-        .status-text { color: var(--deep-pink); font-weight: bold; text-align: center; }
+        .proposal-txt { font-size: 1.1rem; line-height: 1.6; color: #f8f9fa; margin-bottom: 25px; min-height: 80px; }
 
-        h1 { font-family: 'Great Vibes', cursive; font-size: 3.2rem; color: var(--deep-pink); margin: 10px 0; text-shadow: 1px 1px white; }
-        .proposal-text { color: #4a0e0e; font-size: 1.1rem; line-height: 1.6; margin-bottom: 25px; font-style: italic; }
-
-        .btn-container { height: 100px; position: relative; display: flex; justify-content: center; align-items: center; }
+        .btn-wrap { display: flex; justify-content: center; gap: 20px; height: 100px; align-items: center; position: relative; }
         button { 
-            padding: 12px 30px; font-size: 1.1rem; border: none; border-radius: 50px; 
-            cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+            padding: 12px 30px; font-size: 1rem; border: none; border-radius: 12px; 
+            cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s;
         }
-        #yesBtn { background: var(--deep-pink); color: white; border: 2px solid var(--gold); z-index: 10; transform: translateX(-55px); }
-        #noBtn { background: #adb5bd; color: white; position: absolute; transform: translateX(55px); transition: 0.1s; }
+        #yesBtn { background: var(--bright-pink); color: white; box-shadow: 0 0 20px var(--bright-pink); z-index: 100; }
+        #noBtn { background: transparent; color: white; border: 1px solid white; opacity: 0.7; position: absolute; }
 
         .hidden { display: none; }
-        .valentine-wish { font-size: 2.5rem; color: var(--deep-pink); font-family: 'Great Vibes', cursive; margin-bottom: 15px; }
-        .bollywood-msg { font-family: 'Dancing Script', cursive; font-size: 1.4rem; color: #590d22; padding: 15px; background: rgba(255,255,255,0.5); border-radius: 10px; }
-        .footer-tag { margin-top: 20px; font-weight: 600; color: var(--deep-pink); font-size: 0.8rem; border-top: 1px solid #ffccd5; padding-top: 10px; }
+        .loader-bar { width: 100%; height: 6px; background: #444; border-radius: 10px; margin-top: 20px; overflow: hidden; }
+        #barFill { width: 0%; height: 100%; background: var(--gold); transition: 0.1s; }
+        
+        #flash { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; opacity: 0; z-index: 9999; pointer-events: none; }
     </style>
 </head>
-<body onclick="initAudio()">
-    <div id="flashOverlay"></div>
-    <audio id="shutterSound" src="https://www.soundjay.com/mechanical/camera-shutter-click-01.mp3" preload="auto"></audio>
+<body onclick="startMusic()">
+
+    <div id="flash"></div>
+    <div id="particles"></div>
+    
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="card">
-        <div id="proposalContent">
-            <div class="calc-container">
-                <div style="font-size:0.7rem; letter-spacing:2px;">COMPATIBILITY SCANNER</div>
-                <div class="calc-percent" id="percent">0%</div>
+        <h1 class="title-cinematic">Hi Samira 🌹</h1>
+        <div class="names">Mubashir ♾️ Samira</div>
+
+        <div id="stageContent">
+            <div class="calc-box">
+                <div id="statusLabel" style="font-size: 0.6rem; letter-spacing: 2px;">INITIALIZING SCAN...</div>
+                <div id="percent" style="font-size: 2rem; font-weight: bold;">0%</div>
             </div>
-            <h1>Dear Love, ❤️</h1>
-            <p class="proposal-text">Maine poori duniya ki workflows automate kar li, par mera dil sirf tumhare liye <b>"Manual Mode"</b> pe dhadakta hai.</p>
-            <div class="btn-container" id="btnWrapper">
-                <button id="yesBtn" onclick="startLifeLoading()">YES!</button>
-                <button id="noBtn" onmouseover="dodge()" onclick="dodge()">NO</button>
+
+            <p id="mainText" class="proposal-txt">
+                "System is detecting a very special presence... Samira, can we start the soul-syncing process?" ✨
+            </p>
+
+            <div class="btn-wrap" id="btnContainer">
+                <button id="yesBtn" onclick="handleYes()">YES! ❤️</button>
+                <button id="noBtn" onmouseover="dodge()" onclick="dodge()" ontouchstart="dodge()">NO ❌</button>
             </div>
         </div>
 
-        <div id="lifeLoading" class="hidden">
-            <h2 style="text-align:center; font-family:'Dancing Script'; color: var(--gold);">Initializing Forever...</h2>
-            <div class="status-text" id="statusMsg">Syncing Souls...</div>
-            <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
-            <div style="font-size: 0.7rem; opacity: 0.8; text-align: center;">
-                Bypassing hurdles... Done.<br>
-                Optimizing Happiness... 🚀
-            </div>
+        <div id="loadingStage" class="hidden">
+            <h2 id="loadTitle" class="title-cinematic" style="font-size: 2.2rem;">Updating Destiny...</h2>
+            <p id="loadMsg">Syncing 7 Janams... 🌸</p>
+            <div class="loader-bar"><div id="barFill"></div></div>
         </div>
 
-        <div id="successContent" class="hidden">
-            <div class="valentine-wish">Happy Valentine's Day! ❤️</div>
-            <div class="bollywood-msg">
-                "Tumhare bina mera system crash ho jata hai... Jaise heroine ke bina hero adhoora hota hai, waise hi meri life tumhare bina error dikhati hai."
-            </div>
-            <p class="footer-tag">
-                Database updated by <b>Mubashir</b>.<br>Ab tum hamesha ke liye meri ho! 💍
+        <div id="finalStage" class="hidden">
+            <h1 class="title-cinematic" style="font-size: 2.5rem;">Locked Forever! 💍🔒</h1>
+            <p style="font-family: 'Dancing Script', cursive; font-size: 1.4rem; color: #ffccd5;">
+                "Jaise ek perfect movie mein music aur scenes milte hain, waise hi meri automation aur tumhari muskurahat milkar meri duniya poori karte hain." 🍿🌌
+            </p>
+            <div style="font-size: 2.5rem; margin: 15px 0;">🤵🏻‍♂️ 💖 👰🏻‍♀️ ✨ 🧿</div>
+            <p style="font-size: 0.7rem; opacity: 0.8;">
+                STATUS: SUCCESS ✅ <br>
+                <b>Architected with ❤️ by Mubashir</b>
             </p>
         </div>
     </div>
 
     <script>
-        function initAudio() { document.getElementById('shutterSound').play().then(s=>s.pause()).catch(e=>{}); }
+        let currentStep = 1;
+        const mainText = document.getElementById('mainText');
+        const percentText = document.getElementById('percent');
 
-        const loadingMsgs = ["Syncing heartbeats...", "Loading 7 Janams...", "Finalizing Love.exe...", "Happiness 100%"];
-
-        function startLifeLoading() {
-            document.getElementById('proposalContent').classList.add('hidden');
-            document.getElementById('lifeLoading').classList.remove('hidden');
-            let progress = 0;
-            const fill = document.getElementById('loaderFill');
-            const status = document.getElementById('statusMsg');
-            
-            const interval = setInterval(() => {
-                progress += 2;
-                fill.style.width = progress + "%";
-                if(progress % 25 == 0) status.innerText = loadingMsgs[Math.floor(progress/26)] || "Done!";
-                if (progress >= 100) { clearInterval(interval); setTimeout(showSuccess, 500); }
-            }, 50);
-        }
-
-        function showSuccess() {
-            document.getElementById('lifeLoading').classList.add('hidden');
-            document.getElementById('successContent').classList.remove('hidden');
-            document.getElementById('flashOverlay').style.opacity = '1';
-            document.getElementById('shutterSound').play();
-            setTimeout(() => { document.getElementById('flashOverlay').style.opacity = '0'; }, 100);
-            confetti({ particleCount: 150, spread: 60, origin: { y: 0.6 } });
-            document.body.style.background = "var(--deep-pink)";
-        }
-
+        // Step 1: Initial Scan
         let count = 0;
-        const calcInt = setInterval(() => {
-            if(count < 100) { count++; document.getElementById('percent').innerText = count + "%"; } 
-            else { document.getElementById('percent').innerText = "100% PERFECT"; clearInterval(calcInt); }
+        const scanInt = setInterval(() => {
+            if(count < 100) { count++; percentText.innerText = count + "%"; }
+            else { percentText.innerText = "100% READY"; clearInterval(scanInt); }
         }, 30);
 
-        function dodge() {
-            const noBtn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - 120);
-            const y = Math.random() * (window.innerHeight - 50);
-            noBtn.style.position = "fixed";
-            noBtn.style.left = x + "px";
-            noBtn.style.top = y + "px";
+        function handleYes() {
+            if(currentStep === 1) {
+                currentStep = 2;
+                mainText.innerHTML = "Scanning complete! ✅<br>Found: <b>'The World's Most Beautiful Soul'</b>.<br>Samira, do you know how much Mubashir loves you? 🌸";
+                document.getElementById('statusLabel').innerText = "LOVE METER: OVERFLOWING";
+                percentText.innerText = "INFINITE % ♾️";
+            } else if(currentStep === 2) {
+                currentStep = 3;
+                mainText.innerHTML = "Final Question: Will you be the <b>Director</b> of my life's movie and stay with me forever? 🎬💍";
+                document.getElementById('yesBtn').innerText = "QUBOOL HAI! ❤️";
+            } else {
+                startLoading();
+            }
         }
+
+        function dodge() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - 120);
+            const y = Math.random() * (window.innerHeight - 60);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            if (navigator.vibrate) navigator.vibrate(80); // Vibrate on dodge
+        }
+
+        function startLoading() {
+            document.getElementById('stageContent').classList.add('hidden');
+            document.getElementById('loadingStage').classList.remove('hidden');
+            let w = 0;
+            const msgs = ["Securing Database... 🛡️", "Syncing Dreams... 💭", "Bypassing Hurdles... 🚀", "Almost Yours... 💍"];
+            const timer = setInterval(() => {
+                w += 2;
+                document.getElementById('barFill').style.width = w + "%";
+                if(w % 25 == 0) document.getElementById('loadMsg').innerText = msgs[w/25 - 1];
+                if(w >= 100) { clearInterval(timer); showFinal(); }
+            }, 60);
+        }
+
+        function showFinal() {
+            document.getElementById('loadingStage').classList.add('hidden');
+            document.getElementById('finalStage').classList.remove('hidden');
+            document.getElementById('flash').style.opacity = '1';
+            setTimeout(() => document.getElementById('flash').style.opacity = '0', 200);
+            confetti({ particleCount: 300, spread: 100, origin: { y: 0.6 }, colors: ['#ffbd00', '#ff0a54', '#ffffff'] });
+        }
+
+        function startMusic() { document.getElementById('bgMusic').play().catch(() => {}); }
+
+        // Background Particles
+        setInterval(() => {
+            const p = document.createElement('div');
+            const emojis = ['❤️', '✨', '🧿', '🌸', '💍'];
+            p.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            p.style.cssText = `position:fixed; left:${Math.random()*100}vw; top:110vh; font-size:${Math.random()*20+20}px; pointer-events:none; z-index:1; transition: transform ${Math.random()*5+5}s linear;`;
+            document.getElementById('particles').appendChild(p);
+            setTimeout(() => { p.style.transform = `translateY(-120vh) rotate(${Math.random()*360}deg)`; }, 100);
+            setTimeout(() => p.remove(), 8000);
+        }, 400);
     </script>
 </body>
 </html>
