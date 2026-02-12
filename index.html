@@ -5,58 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <title>A Special Surprise ❤️</title>
-    <meta name="title" content="A Special Surprise ❤️">
-    <meta name="description" content="Mubashir has a special automated message for you. Open to reveal!">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://muahshi.github.io/Valentine/">
     <meta property="og:title" content="A Special Surprise ❤️">
     <meta property="og:description" content="Mubashir has automated something special for you! 💍🚀">
-    <meta property="og:image" content="https://muahshi.github.io/Valentine/og-image.jpg">
-
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://muahshi.github.io/Valentine/">
-    <meta property="twitter:title" content="A Special Surprise ❤️">
-    <meta property="twitter:description" content="Mubashir has automated something special for you! 💍🚀">
-    <meta property="twitter:image" content="https://muahshi.github.io/Valentine/og-image.jpg">
+    <meta property="og:image" content="https://muahshi.github.io/Valentine/og-image.jpg?v=2">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <style>
-        :root { --p: #ff4d6d; --dr: #800f2f; --glass: rgba(255, 255, 255, 0.95); }
-        body { margin: 0; height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle, #ffb3c1 0%, #fae1dd 100%); font-family: 'Poppins', sans-serif; overflow: hidden; position: relative; }
+        :root { 
+            --deep-pink: #d81b60; 
+            --bright-pink: #ff4d6d; 
+            --gold: #d4af37;
+            --bg-gradient: linear-gradient(135deg, #ff8fa3 0%, #ff4d6d 100%);
+        }
+
+        body { 
+            margin: 0; height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center; 
+            background: var(--bg-gradient); font-family: 'Poppins', sans-serif; overflow: hidden; 
+        }
         
         #flashOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; opacity: 0; pointer-events: none; z-index: 9999; }
         
+        /* The Bag/Box Style Card */
         .card { 
-            background: var(--glass); backdrop-filter: blur(15px); padding: 2.5rem 1.5rem; 
-            border-radius: 40px; box-shadow: 0 25px 60px rgba(255, 75, 110, 0.3); 
-            text-align: center; z-index: 10; width: 88%; max-width: 480px; 
-            border: 3px solid white; min-height: 520px; display: flex; flex-direction: column; justify-content: center;
+            background: #fff0f3; 
+            padding: 2rem; 
+            border-radius: 20px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2); 
+            text-align: center; z-index: 10; width: 85%; max-width: 420px; 
+            border: 8px double var(--bright-pink); /* Double border like the bag frame */
+            outline: 2px solid var(--gold); /* Thin gold accent */
+            position: relative;
         }
 
-        .calc-container { background: linear-gradient(135deg, #ff4d6d, #ff758f); padding: 20px; border-radius: 25px; margin-bottom: 20px; color: white; }
-        .calc-percent { font-size: 2.8rem; font-weight: bold; font-family: 'monospace'; }
+        /* Gold Corner Accents */
+        .card::before { content: '🌸'; position: absolute; top: 10px; left: 10px; font-size: 1.2rem; }
+        .card::after { content: '🌸'; position: absolute; bottom: 10px; right: 10px; font-size: 1.2rem; }
 
-        /* Loading Screen Styles */
-        #lifeLoading { text-align: left; font-family: 'monospace'; font-size: 0.9rem; color: var(--dr); padding: 10px; }
-        .loader-bar { width: 100%; height: 10px; background: #eee; border-radius: 5px; overflow: hidden; margin: 15px 0; }
-        .loader-fill { width: 0%; height: 100%; background: var(--p); transition: width 0.3s; }
-        .status-text { color: var(--p); font-weight: bold; height: 20px; }
+        .calc-container { 
+            background: var(--deep-pink); padding: 15px; border-radius: 15px; 
+            margin-bottom: 20px; color: white; border-bottom: 4px solid var(--gold);
+        }
+        .calc-percent { font-size: 2.5rem; font-weight: bold; font-family: 'serif'; }
 
-        h1 { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--dr); margin: 10px 0; }
-        .proposal-text { color: #590d22; font-size: 1.1rem; line-height: 1.5; margin-bottom: 20px; }
+        /* Loading Screen */
+        #lifeLoading { text-align: left; font-family: 'monospace'; color: var(--deep-pink); }
+        .loader-bar { width: 100%; height: 12px; background: #ffe5ec; border-radius: 10px; overflow: hidden; margin: 15px 0; border: 1px solid var(--gold); }
+        .loader-fill { width: 0%; height: 100%; background: var(--bright-pink); transition: width 0.3s; }
+        .status-text { color: var(--deep-pink); font-weight: bold; text-align: center; }
 
-        .btn-container { margin-top: 20px; position: relative; height: 120px; width: 100%; display: flex; justify-content: center; align-items: center; }
-        button { padding: 15px 35px; font-size: 1.2rem; border: none; border-radius: 20px; cursor: pointer; font-weight: 600; box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
-        #yesBtn { background: var(--p); color: white; z-index: 100; position: relative; transform: translateX(-60px); }
-        #noBtn { background: #8d99ae; color: white; position: absolute; z-index: 99; transform: translateX(60px); transition: all 0.2s ease-out; }
+        h1 { font-family: 'Great Vibes', cursive; font-size: 3.2rem; color: var(--deep-pink); margin: 10px 0; text-shadow: 1px 1px white; }
+        .proposal-text { color: #4a0e0e; font-size: 1.1rem; line-height: 1.6; margin-bottom: 25px; font-style: italic; }
+
+        .btn-container { height: 100px; position: relative; display: flex; justify-content: center; align-items: center; }
+        button { 
+            padding: 12px 30px; font-size: 1.1rem; border: none; border-radius: 50px; 
+            cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+        }
+        #yesBtn { background: var(--deep-pink); color: white; border: 2px solid var(--gold); z-index: 10; transform: translateX(-55px); }
+        #noBtn { background: #adb5bd; color: white; position: absolute; transform: translateX(55px); }
 
         .hidden { display: none; }
-        .valentine-wish { font-size: 2.2rem; color: var(--p); font-family: 'Great Vibes', cursive; margin-bottom: 10px; font-weight: bold; }
-        .bollywood-msg { font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--dr); border-top: 2px dashed var(--p); padding-top: 15px; line-height: 1.4; }
-        .footer-tag { margin-top: 20px; font-weight: 600; color: var(--p); font-size: 0.9rem; }
+        .valentine-wish { font-size: 2.5rem; color: var(--deep-pink); font-family: 'Great Vibes', cursive; margin-bottom: 15px; }
+        .bollywood-msg { font-family: 'Dancing Script', cursive; font-size: 1.4rem; color: #590d22; padding: 15px; background: rgba(255,255,255,0.5); border-radius: 10px; }
+        .footer-tag { margin-top: 20px; font-weight: 600; color: var(--deep-pink); font-size: 0.8rem; border-top: 1px solid #ffccd5; padding-top: 10px; }
     </style>
 </head>
 <body onclick="initAudio()">
@@ -66,115 +80,79 @@
     <div class="card">
         <div id="proposalContent">
             <div class="calc-container">
-                <div style="font-size:0.8rem; letter-spacing:2px; font-weight:600;">COMPATIBILITY SCANNER</div>
+                <div style="font-size:0.7rem; letter-spacing:2px;">COMPATIBILITY SCANNER</div>
                 <div class="calc-percent" id="percent">0%</div>
             </div>
             <h1>Dear Love, ❤️</h1>
             <p class="proposal-text">Maine poori duniya ki workflows automate kar li, par mera dil sirf tumhare liye <b>"Manual Mode"</b> pe dhadakta hai.</p>
             <div class="btn-container" id="btnWrapper">
                 <button id="yesBtn" onclick="startLifeLoading()">YES!</button>
-                <button id="noBtn" onmouseover="dodge()" onclick="dodge()" ontouchstart="dodge()">NO</button>
+                <button id="noBtn" onmouseover="dodge()" onclick="dodge()">NO</button>
             </div>
         </div>
 
         <div id="lifeLoading" class="hidden">
-            <h3 style="text-align:center; font-family:'Poppins';">Initializing Forever...</h3>
-            <div class="status-text" id="statusMsg">Connecting souls...</div>
+            <h2 style="text-align:center; font-family:'Dancing Script'; color: var(--gold);">Initializing Forever...</h2>
+            <div class="status-text" id="statusMsg">Syncing Souls...</div>
             <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
-            <div id="logs" style="font-size: 0.75rem; opacity: 0.7;">
-                > Accessing Happiness.exe...<br>
-                > Bypassing 'No' button... Done.<br>
-                > Loading "Soulmate" Database...
+            <div style="font-size: 0.7rem; opacity: 0.8; text-align: center;">
+                Bypassing hurdles... Done.<br>
+                Optimizing Happiness... 🚀
             </div>
         </div>
 
         <div id="successContent" class="hidden">
-            <div class="valentine-wish">Happy Valentine's Day Love ❤️</div>
+            <div class="valentine-wish">Happy Valentine's Day! ❤️</div>
             <div class="bollywood-msg">
-                "Tumhare bina mera system crash ho jata hai... Jaise Bollywood ki filmon mein heroine ke bina hero adhoora hota hai, waise hi meri life ki automation tumhare bina error dikhati hai. I love you!"
+                "Tumhare bina mera system crash ho jata hai... Jaise heroine ke bina hero adhoora hota hai, waise hi meri life tumhare bina error dikhati hai."
             </div>
             <p class="footer-tag">
-                Database updated by <b>Mubashir</b>.<br>Screenshot lo aur share karo! 💍🚀
+                Database updated by <b>Mubashir</b>.<br>Ab tum hamesha ke liye meri ho! 💍
             </p>
         </div>
     </div>
 
     <script>
-        function initAudio() {
-            let s = document.getElementById('shutterSound');
-            s.play().then(() => { s.pause(); s.currentTime = 0; }).catch(() => {});
-        }
+        function initAudio() { document.getElementById('shutterSound').play().then(s=>s.pause()); }
 
-        const loadingMsgs = [
-            "Syncing heartbeats...",
-            "Loading 7 Janams module...",
-            "Downloading infinite care...",
-            "Configuring 'Always Together' settings...",
-            "Finalizing Soulmate Agreement...",
-            "Redirecting to Happiness... 100%"
-        ];
+        const loadingMsgs = ["Syncing heartbeats...", "Loading 7 Janams...", "Finalizing Love.exe...", "Happiness 100%"];
 
         function startLifeLoading() {
             document.getElementById('proposalContent').classList.add('hidden');
             document.getElementById('lifeLoading').classList.remove('hidden');
-            
             let progress = 0;
-            let msgIndex = 0;
             const fill = document.getElementById('loaderFill');
             const status = document.getElementById('statusMsg');
             
             const interval = setInterval(() => {
-                progress += Math.random() * 15;
-                if (progress > 100) progress = 100;
+                progress += 2;
                 fill.style.width = progress + "%";
-                
-                if (progress > (msgIndex + 1) * 15 && msgIndex < loadingMsgs.length - 1) {
-                    msgIndex++;
-                    status.innerText = loadingMsgs[msgIndex];
-                }
-
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    setTimeout(showSuccess, 500);
-                }
-            }, 400);
-        }
-
-        function triggerFlash() {
-            const flash = document.getElementById('flashOverlay');
-            document.getElementById('shutterSound').play();
-            let flashes = 0;
-            const fInterval = setInterval(() => {
-                flash.style.opacity = '1';
-                setTimeout(() => { flash.style.opacity = '0'; }, 50);
-                flashes++;
-                if (flashes > 3) clearInterval(fInterval);
-            }, 150);
+                if(progress % 25 == 0) status.innerText = loadingMsgs[Math.floor(progress/26)];
+                if (progress >= 100) { clearInterval(interval); setTimeout(showSuccess, 500); }
+            }, 50);
         }
 
         function showSuccess() {
             document.getElementById('lifeLoading').classList.add('hidden');
             document.getElementById('successContent').classList.remove('hidden');
-            triggerFlash();
-            confetti({ particleCount: 200, spread: 70, origin: { y: 0.6 } });
-            document.body.style.background = "#ff4d6d";
+            document.getElementById('flashOverlay').style.opacity = '1';
+            document.getElementById('shutterSound').play();
+            setTimeout(() => { document.getElementById('flashOverlay').style.opacity = '0'; }, 100);
+            confetti({ particleCount: 150, spread: 60 });
+            document.body.style.background = "var(--deep-pink)";
         }
 
         let count = 0;
         const calcInt = setInterval(() => {
             if(count < 100) { count++; document.getElementById('percent').innerText = count + "%"; } 
             else { document.getElementById('percent').innerText = "100% PERFECT"; clearInterval(calcInt); }
-        }, 50);
+        }, 30);
 
         function dodge() {
             const noBtn = document.getElementById('noBtn');
-            const wrapper = document.getElementById('btnWrapper');
-            const rect = wrapper.getBoundingClientRect();
-            noBtn.style.left = Math.random() * (rect.width - 80) + "px";
-            noBtn.style.top = Math.random() * (rect.height - 40) + "px";
-            if (navigator.vibrate) navigator.vibrate(50);
+            noBtn.style.left = Math.random() * 150 + "px";
+            noBtn.style.top = Math.random() * 50 + "px";
         }
     </script>
 </body>
 </html>
-
