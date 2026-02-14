@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For Samira ❤️</title>
+    <title>For Samira ❤️ | My Valentine</title>
     
+    <meta property="og:title" content="A Surprise for Samira ❤️">
+    <meta property="og:description" content="Mubashir has a special message for you.">
+    <meta property="og:image" content="https://muahshi.github.io/Valentine/og-card.jpg">
+
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
     
     <style>
-        :root { --p: #ff4d6d; --g: #ffbd00; --bg: #0f0008; }
+        :root { --p: #ff4d6d; --g: #ffbd00; --bg: #0a0005; }
         
         body { margin: 0; height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center; background: var(--bg); font-family: 'Poppins', sans-serif; overflow: hidden; color: white; }
 
-        /* Background Layer (No Overlay on Content) */
+        /* Background Layer */
         #bg-elements { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-        .fly { position: absolute; font-family: 'Dancing Script', cursive; opacity: 0.4; animation: flyUp linear infinite; color: #ffccd5; white-space: nowrap; }
+        .fly { position: absolute; font-family: 'Dancing Script', cursive; opacity: 0.5; animation: flyUp linear infinite; color: #ffccd5; white-space: nowrap; }
         
         @keyframes flyUp { 
             0% { transform: translateY(110vh) rotate(0deg); opacity: 0; } 
-            10% { opacity: 0.4; }
-            90% { opacity: 0.4; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
             100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; } 
         }
 
@@ -29,33 +33,20 @@
         .card { 
             background: rgba(255, 255, 255, 0.05); 
             padding: 30px 20px; border-radius: 30px; 
-            box-shadow: 0 0 50px rgba(255, 77, 109, 0.2); 
+            box-shadow: 0 0 50px rgba(255, 77, 109, 0.3); 
             text-align: center; width: 85%; max-width: 380px; 
-            backdrop-filter: blur(20px); z-index: 10; position: relative;
+            backdrop-filter: blur(25px); z-index: 10; position: relative;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        h1 { font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: var(--g); margin: 0 0 15px 0; }
+        h1 { font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: var(--g); margin-bottom: 10px; }
+        .msg-area { min-height: 100px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 1.1rem; line-height: 1.4; }
         
-        .msg-area { min-height: 100px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; font-size: 1.1rem; line-height: 1.5; color: #eee; }
+        .btn-box { display: flex; flex-direction: column; align-items: center; gap: 15px; min-height: 130px; position: relative; width: 100%; }
+        button { width: 100%; max-width: 250px; padding: 15px; border-radius: 50px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 1rem; }
         
-        /* Button Container (Flex to prevent overlap) */
-        .btn-box { 
-            display: flex; flex-direction: column; align-items: center; gap: 15px; 
-            min-height: 120px; position: relative; 
-        }
-
-        button { 
-            width: 80%; padding: 14px; border-radius: 50px; border: none; 
-            font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 1rem; 
-        }
-
-        #yesBtn { background: var(--p); color: white; box-shadow: 0 0 20px var(--p); z-index: 20; position: relative; }
-        
-        #noBtn { 
-            background: transparent; border: 1px solid white; color: white; 
-            opacity: 0.7; position: absolute; width: 120px; bottom: 0;
-        }
+        #yesBtn { background: var(--p); color: white; box-shadow: 0 0 20px var(--p); z-index: 20; }
+        #noBtn { background: transparent; border: 1px solid white; color: white; opacity: 0.7; position: absolute; width: 100px; bottom: 0; }
 
         .hidden { display: none; }
         #yt-player { position: absolute; top: -1000px; visibility: hidden; }
@@ -70,56 +61,59 @@
         <div id="quiz">
             <h1>Samira ❤️</h1>
             <div class="msg-area">
-                <p id="txtText">"Ready for a cinematic surprise that was coded just for you?" 🎁</p>
+                <p id="txtText">"Ek special surprise aapka intezar kar raha hai... ❤️"</p>
             </div>
-
             <div class="btn-box">
-                <button id="yesBtn" onclick="nextStep()">Haan, Start Karo! ❤️</button>
-                <button id="noBtn" onmouseover="dodge()" onclick="dodge()" ontouchstart="dodge()">No</button>
+                <button id="yesBtn" onclick="handleFlow()">Start Surprise ✨</button>
+                <button id="noBtn" onmouseover="dodge()" onclick="dodge()">No</button>
             </div>
         </div>
 
         <div id="final" class="hidden">
-            <h1 style="font-size: 2.5rem;">Database Locked! 💍</h1>
-            <p style="font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--g); margin: 15px 0;">
-                "Mubashir Loves Samira"
+            <h1 style="font-size: 2.5rem;">Forever Yours! 💍</h1>
+            <p style="font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: var(--g); margin: 15px 0;">
+                "Samira ❤️ Mubashir"
             </p>
-            <div style="font-size: 3rem; margin: 10px 0;">🧿 🤵🏻‍♂️ 💍 👰🏻‍♀️</div>
-            <p style="font-size: 0.7rem; opacity: 0.5;">FOREVER SYNCED ✅</p>
+            <div style="font-size: 3rem;">🧿 🤵🏻‍♂️ 💍 👰🏻‍♀️</div>
+            <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 10px;">PROPOSAL STATUS: SUCCESS ✅</p>
         </div>
     </div>
 
     <script>
         let player;
         let step = 0;
-        const scenarios = [
-            { t: "Kya tum janti ho, tum meri life ki sabse pyaari discovery ho? ✨", b: "Sacchi? 🥰" },
-            { t: "Har sawal ka jawab tum ho, aur har khushi ki wajah tum. Saath rahogi na?", b: "Hamesha ❤️" },
-            { t: "My baby, my valentine... Will you be mine forever? 💍", b: "QUBOOL HAI! 💖" }
+        let musicStarted = false;
+
+        const slides = [
+            { t: "Suno Samira... 'My baby, my valentine', ye lines sirf tumhare liye hain. ❤️", b: "Listen More... ✨" },
+            { t: "Mubashir ki life ka sabse bada project aur automation tumhara pyar hai. Saath dogi?", b: "Hamesha ❤️" },
+            { t: "Love Nwantiti... 'Tu hi hai meri jaan'. Will you be mine forever? 💍", b: "QUBOOL HAI! 💖" }
         ];
 
-        // YouTube API Setup
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('yt-player', {
                 height: '0', width: '0', videoId: 'FQQGgYNPDyc',
-                playerVars: { 'start': 35, 'loop': 1 },
-                events: { 'onReady': onPlayerReady }
+                playerVars: { 'start': 35, 'autoplay': 0, 'controls': 0 },
+                events: { 'onReady': () => console.log("Player Ready") }
             });
         }
-        function onPlayerReady(event) { console.log("Song Ready"); }
 
-        function nextStep() {
-            // First click triggers music & floating elements
-            if (player && player.playVideo) {
-                player.playVideo();
-                startFloating();
+        function handleFlow() {
+            // Logic: Only play music on the VERY FIRST click
+            if (!musicStarted) {
+                if (player && player.playVideo) {
+                    player.seekTo(35);
+                    player.playVideo();
+                    musicStarted = true;
+                    startFloatingEffects();
+                }
             }
 
-            if(step < scenarios.length) {
+            if(step < slides.length) {
                 document.getElementById('txtText').style.opacity = 0;
                 setTimeout(() => {
-                    document.getElementById('txtText').innerHTML = scenarios[step].t;
-                    document.getElementById('yesBtn').innerText = scenarios[step].b;
+                    document.getElementById('txtText').innerHTML = slides[step].t;
+                    document.getElementById('yesBtn').innerText = slides[step].b;
                     document.getElementById('txtText').style.opacity = 1;
                     step++;
                 }, 300);
@@ -131,36 +125,33 @@
         function showFinal() {
             document.getElementById('quiz').classList.add('hidden');
             document.getElementById('final').classList.remove('hidden');
-            confetti({ particleCount: 400, spread: 100, origin: { y: 0.7 } });
+            confetti({ particleCount: 500, spread: 120, origin: { y: 0.6 } });
+            if(navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 100]);
         }
 
         function dodge() {
             const b = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - 120);
-            const y = Math.random() * (window.innerHeight - 50);
+            b.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+            b.style.top = Math.random() * (window.innerHeight - 50) + 'px';
             b.style.position = 'fixed';
-            b.style.left = x + 'px';
-            b.style.top = y + 'px';
-            if(navigator.vibrate) navigator.vibrate(50);
         }
 
-        function startFloating() {
+        function startFloatingEffects() {
             const container = document.getElementById('bg-elements');
             const items = [
-                "Mubashir ❤️ Samira", "I Love You", "Je t'aime", "Main tumse pyar karta hoon",
-                "Ana behibak", "Te amo", "Ti amo", "🌹", "🧸", "🧿", "💍", "✨"
+                "Samira ❤️ Mubashir", "I Love You", "Main tumse pyar karta hoon",
+                "Ana behibak", "Je t'aime", "Te amo", "Ti amo", "🌹", "🧸", "🧿", "💍", "✨", "💖"
             ];
-            if(container.children.length > 5) return;
             setInterval(() => {
                 const div = document.createElement('div');
                 div.className = 'fly';
                 div.innerText = items[Math.floor(Math.random() * items.length)];
                 div.style.left = Math.random() * 90 + "vw";
-                div.style.fontSize = (Math.random() * 15 + 12) + "px";
-                div.style.animationDuration = (Math.random() * 5 + 6) + "s";
+                div.style.fontSize = (Math.random() * 15 + 14) + "px";
+                div.style.animationDuration = (Math.random() * 5 + 7) + "s";
                 container.appendChild(div);
-                setTimeout(() => div.remove(), 7000);
-            }, 500);
+                setTimeout(() => div.remove(), 8000);
+            }, 600);
         }
     </script>
 </body>
